@@ -5,6 +5,6 @@ const { getDiets } = require("./controllers/_Diets");
 const server = Router();
 
 // Configurar los routers, GET POST
-server.use("/get", getDiets);
+server.get("/get", getDiets);
 
 module.exports = server;

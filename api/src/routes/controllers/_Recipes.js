@@ -78,16 +78,19 @@ async function getRecipeByName(req, res, next) {
 }
 
 const postRecipe = async (req, res, next) => {
-  const { recipe } = req.body;
-  // intanciadeDieta.addRecipe(instanciadeReceta)
-  // instancia --> receta = await Recipe.creatte{}
-  
-  receta = await Recipe.create(recipe)
-  // dieta = Diet.findOne({ where: { name: e}})
-
   try {
+    const {recipe , diets} = req.body;
+    let receta = await Recipe.create(recipe)
+    
+    diets.forEach(async d => {
+      let dieta = await Diet.findOne({ where: {name: d}})
+      await dieta.addRecipe(receta);
+    })
+
+    let response = await Recipe.findAll({ where: {name:recipe.name}, include: Diet})
+    res.json(response)
   } catch (error) {
-    next(error);
+   next(error);
   }
 };
 
