@@ -1,0 +1,12 @@
+Recipe
+
+name 
+summary
+score
+healthLevel 
+steps
+image 
+readyInMinutes
+
+
+Diet 
