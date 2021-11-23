@@ -1,6 +1,6 @@
 const { Router } = require("express");
 // Importar todos los controllers
-const { postRecipe , getRecipeByName } = require("./controllers/_Recipes");
+const { postRecipe , getRecipeByName ,getById } = require("./controllers/_Recipes");
 
 const server = Router();
 
@@ -9,6 +9,7 @@ const server = Router();
 
 server.get('/',getRecipeByName);//recipes/?name=
 server.post('/', postRecipe)
+server.get('/:id',getById)
 
  
 

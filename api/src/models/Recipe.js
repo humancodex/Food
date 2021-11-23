@@ -17,27 +17,23 @@ module.exports = (sequelize) => {
     },
     summary: {
       type: DataTypes.STRING,
+
       allowNull: false,
     },
     score: {
       type: DataTypes.INTEGER,
-      
     },
     healthLevel: {
       type: DataTypes.INTEGER,
-      
     },
     steps: {
       type: DataTypes.STRING,
-
     },
     image: {
       type: DataTypes.TEXT,
-      
     },
     readyInMinutes: {
       type: DataTypes.INTEGER,
-      
     },
   });
 };
