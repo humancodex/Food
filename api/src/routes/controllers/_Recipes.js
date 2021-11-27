@@ -1,6 +1,10 @@
 const axios = require("axios");
+// const { Sequelize } = require("sequelize");
 const { Recipe, Diet } = require("../../db");
-const { API_KEY } = process.env;
+const { API_KEY , NEXT_KEY } = process.env;
+
+
+
 
 async function getRecipes(req, res, next) {
   //tryc y apretar enter
@@ -8,6 +12,7 @@ async function getRecipes(req, res, next) {
     let apiGet = await axios.get(
       `https://api.spoonacular.com/recipes/complexSearch?number=100&apiKey=${API_KEY}&addRecipeInformation=true`
     );
+   
     const apiInfo = apiGet.data.results;
 
     const apiRecipe = await apiInfo.map((r) => {
@@ -20,6 +25,7 @@ async function getRecipes(req, res, next) {
       }
 
       return {
+        id:r.id,
         name: r.title,
         summary: r.summary,
         score: r.spoonacularScore,
@@ -36,35 +42,53 @@ async function getRecipes(req, res, next) {
   } catch (e) {
     next(e);
   }
-}
+} //precargar en home 
 
 async function getRecipeByName(req, res, next) {
   try {
-    let { name } = req.query;
+    let name = req.query.name;
+    // name = "%" + name+ "%"; //reemplaza el includes
     if (name) {
-      let db = await Recipe.findAll({ where: { name : name.toLowerCase() }, include: Diet });
-      if (db.length > 0) {
-        res.status(200).json(db);
-      } else {
-        let foundR = await axios.get(
-          `https://api.spoonacular.com/recipes/complexSearch?name=${name}&apiKey=${API_KEY}&addRecipeInformation=true`
-        );
+      name = name.toLowerCase();
+      let getRp = await axios.get(
+        `https://api.spoonacular.com/recipes/complexSearch?number=100&apiKey=${API_KEY}&addRecipeInformation=true`
+      );
 
-        if (foundR.data) {
-          let recipeInfo = {
-            name: foundR.data.name,
+      let apiRecipes = getRp.data.results.filter((r) =>
+      r.title.toLowerCase().includes(name)
+     );
+
+         const recipeInfo = apiRecipes.map((r) => {
+
+          if (r.vegetarian) r.diets.push("vegetarian");
+
+          return {
+            name: r.title,
+            image: r.image,
+            diets: r.diets,
           };
+        });
 
-          res.status(200).json(recipeInfo);
-        }
-      }
+      // name = "%" + name + "%";
+      
+      let recipes = await Recipe.findAll({
+        where: {
+          name: name,
+          }, include: Diet
+        },
+      );
+
+      let result = recipes.concat(recipeInfo);
+      if (result.length > 0) res.json(result);
+      else res.send("No se encontró la receta solicitada");
+
     } else {
       getRecipes(req, res, next);
     }
   } catch (error) {
     next(error);
   }
-}
+} //cuando mandes desde el front  que sea en minusculas 
 
 const postRecipe = async (req, res, next) => {
   try {
@@ -84,80 +108,54 @@ const postRecipe = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+}; //done
 
 const getById = async (req, res) => {
   const { id } = req.params;
-try {
-   axios.get(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
-    )
-    .then((r) => {
-      let getR = r.data;
+  try {
+    axios
+      .get(
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+      )
+      .then(
+        (r) => {
+          let getR = r.data;
 
           var pasos = "";
           if (getR.analyzedInstructions[0]) {
             let stepsInfo = getR.analyzedInstructions[0].steps;
             stepsInfo.forEach((i) => {
-              pasos += i.number + ". " + i.step;})
-            
+              pasos += i.number + ". " + i.step;
+            });
           }
-          if (getR.vegetarian)getR.diets.push('vegetarian')
+          if (getR.vegetarian) getR.diets.push("vegetarian");
 
           let recipe = {
-              id: getR.id,
-              name: getR.title,
-              summary: getR.summary,
-              score: getR.spoonacularScore,
-              healthLevel: getR.healthScore,
-              readyInMinutes: getR.readyInMinutes,
-              diets:getR.diets,
-              image: getR.image,
-              steps: pasos,
-              
-            }
-             
-         
-        res.status(200).json(recipe)
-                  
+            id: getR.id,
+            name: getR.title,
+            summary: getR.summary,
+            score: getR.spoonacularScore,
+            healthLevel: getR.healthScore,
+            readyInMinutes: getR.readyInMinutes,
+            diets: getR.diets,
+            image: getR.image,
+            steps: pasos,
+          };
+
+          res.status(200).json(recipe);
         },
-        async ()=>{
+        async () => {
+          let db = await Recipe.findAll({ where: { id }, include: Diet });
+          if (db.length > 0) {
+            res.status(200).json(db);
+          }
+        }
+      );
+  } catch (error) {
+    res.status(400).send(error);
+  }
+}; //done
 
-      let db = await Recipe.findAll({ where: { id }, include: Diet });
-      if (db.length > 0) {
-        res.status(200).json(db);
-      }
-  
-      })
-
-
-      } catch (error) {
-        res.status(400).send(error)
-      }
-
-}
-    
-    
-//  let steps= ''
-//  await totalR.map(e=>{
-
-//   if (e.analyzedInstructions[0]) {
-
-//     let stepsInfo = e.analyzedInstructions[0].steps;
-//     stepsInfo.forEach(i =>{
-//       steps += i.number + ". " + i.step;
-//     })
-//     }
-//     })
-//     return {
-//     name: r.title,
-//     summary: r.summary,
-//     score: r.spoonacularScore,
-//     healthLevel: r.healthScore,
-//     readyInMinutes: r.readyInMinutes,
-//     image: r.image,
-//     steps: steps,
-//   };
 
 // Nombre
 // Resumen del plato
