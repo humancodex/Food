@@ -4,13 +4,13 @@ const { Recipe, Diet } = require("../../db");
 const { API_KEY , NEXT_KEY } = process.env;
 
 
-
+const API = API_KEY;
 
 async function getRecipes(req, res, next) {
   //tryc y apretar enter
   try {
     let apiGet = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?number=100&apiKey=${API_KEY}&addRecipeInformation=true`
+      `https://api.spoonacular.com/recipes/complexSearch?number=100&apiKey=${API}&addRecipeInformation=true`
     );
    
     const apiInfo = apiGet.data.results;
@@ -23,6 +23,8 @@ async function getRecipes(req, res, next) {
           stepByStep += i.number + ". " + i.step;
         });
       }
+      
+     if (r.vegetarian) r.diets.push("vegetarian");
 
       return {
         id:r.id,
@@ -33,10 +35,11 @@ async function getRecipes(req, res, next) {
         readyInMinutes: r.readyInMinutes,
         image: r.image,
         steps: stepByStep,
+        diet: r.diets
       };
     });
 
-    let listRecipes = await Recipe.findAll();
+    let listRecipes = await Recipe.findAll({include: Diet});
 
     res.json(listRecipes.concat(apiRecipe));
   } catch (e) {
@@ -51,7 +54,7 @@ async function getRecipeByName(req, res, next) {
     if (name) {
       name = name.toLowerCase();
       let getRp = await axios.get(
-        `https://api.spoonacular.com/recipes/complexSearch?number=100&apiKey=${API_KEY}&addRecipeInformation=true`
+        `https://api.spoonacular.com/recipes/complexSearch?number=100&apiKey=${API}&addRecipeInformation=true`
       );
 
       let apiRecipes = getRp.data.results.filter((r) =>
@@ -115,7 +118,7 @@ const getById = async (req, res) => {
   try {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API}`
       )
       .then(
         (r) => {

@@ -1,31 +1,44 @@
-import React from 'react'
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getRecipes } from "../../redux/actions/index";
+import { useEffect } from "react";
+
+import Recipes from "../Recipes/index";
 
 
-import Navbar from '../Navbar/index'
-import { HomeContainer} from "./HomeElements";
-import Recipes from '../Recipes/index'
-// import Navbar from "../Navbar/index";
-
-
-// //aqui me hago el paginado 
-//RECIBE RECIPES / SEARCHBAR  
+// //aqui me hago el paginado
+//RECIBE envioa recipes / SEARCHBAR
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const recips = useSelector((state) => state.recipes);
 
-// const dispatch = useDispatch();
-// const recipes = useSelector((state)=> state.recipes);
-
-// // useEffect(() => dispatch(getRecipes()),)
+  useEffect(() => dispatch(getRecipes()), [dispatch]);
 
 
-    return (
-      <HomeContainer>
-        {/* <Navbar /> */}
-        <h1>HOLA SOY HOME</h1>
-        <Recipes />
-      </HomeContainer>
-    );
-}
+//PAGINADO
+  const [currentPage , setCurrentPage] = useState(1)
+  const [recipesPerPage, setRecipesPerPage] = useState(9)
+  const indexOfLastRp = currentPage * recipsPerPage
+  const indexOfFirstRp = indexOfLastRp - recipsPerPage
+  const currentRecipes = recips.slice(indexOfFirstRp, indexOfLastRp)
 
-export default Home
 
+
+
+  return (
+  
+    <div>
+    
+      {currentRecipes?.map((r) => (
+        
+          <Recipes id={r.id} name={r.name} image={r.image} diet={r.diet} />
+       
+      ))}
+    </div>
+
+
+  );
+};
+
+export default Home;

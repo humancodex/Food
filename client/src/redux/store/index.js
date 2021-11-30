@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore , compose } from "redux";
-import rootReducer from "../reducer/index";
+import rootReducer from "../reducers/index";
 import thunk from "redux-thunk";
 // import { composeWithDevTools } from "redux-devtools-extension";
 
