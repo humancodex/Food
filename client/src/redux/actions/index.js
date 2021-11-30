@@ -38,3 +38,14 @@ export const getById = (id) => {
     });
   };
 };
+
+export const getDiets = () => {
+  return async function (dispatch) {
+    let get = await axios.get("http://localhost:3001/diets")
+    return dispatch({
+      type: "GET_DIETS",
+      payload: get.data,
+    });
+  }
+  
+}

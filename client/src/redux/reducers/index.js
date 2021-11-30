@@ -1,4 +1,4 @@
-import {GET_RECIPES,GET_BY_ID } from "../actions/index"
+import {GET_RECIPES,GET_BY_ID,GET_DIETS } from "../actions/index"
 
 // 
 const initialState ={
@@ -19,6 +19,11 @@ export default function rootReducer(state = initialState,action) {
         return {
           ...state,
           detailId: action.payload,
+        };
+      case GET_DIETS:
+        return {
+          ...state,
+          diets: action.payload,
         };
 
       default:

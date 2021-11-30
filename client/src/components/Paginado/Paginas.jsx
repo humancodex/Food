@@ -1,4 +1,8 @@
 import React from 'react'
+import styles from './Pages.module.css'
+
+
+
 
 function Paginas({recipsPerPage , recips , paginado}) {
 const pageNumbers = []
@@ -11,7 +15,7 @@ pageNumbers.push(i)
 
     return (
        <nav>
-           <ul>
+           <ul className={styles.pagination}>
                {pageNumbers?.map(n=> (
                    <li>
                        <button onClick={()=>{paginado(n)}}>{n}</button>
