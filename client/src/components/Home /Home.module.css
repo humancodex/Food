@@ -1,0 +1,12 @@
+.recipes{
+    display: grid;
+    grid-template-columns:300px 300px 300px;
+    grid-column-gap: 60px ;
+    grid-row-gap: 60px ;
+    justify-content: center;
+}
+.foodly{
+    margin:auto;
+      justify-content: center;
+
+}

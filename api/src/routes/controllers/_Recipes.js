@@ -132,7 +132,7 @@ const getById = async (req, res) => {
             });
           }
           if (getR.vegetarian) getR.diets.push("vegetarian");
-
+           
           let recipe = {
             id: getR.id,
             name: getR.title,

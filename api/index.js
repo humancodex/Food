@@ -23,7 +23,7 @@ const { Diet } = require("./src/db");
 const diets_List = require("./src/routes/controllers/Diets_list");
 
 // Syncing all the models at once.
-conn.sync({ force: false }).then(async () => {
+conn.sync({ force:false}).then(async () => {
   //antes de sincronizar el server cargas las dietas
  try { let dataBase = await Diet.findAll();
 

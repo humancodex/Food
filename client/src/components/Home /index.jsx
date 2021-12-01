@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Home.module.css"
 import { useSelector, useDispatch } from "react-redux";
 import { getRecipes } from "../../redux/actions/index";
 import { useEffect , useState} from "react";
@@ -27,21 +28,22 @@ const paginado = (pageNumber)=> setCurrentPage(pageNumber)
 
 
   return (
-  
     <div>
-<h1>FOODLY</h1>
-      <SearchBar/>
-      <Pages recipsPerPage={recipesPerPage} recips={recips.length}  paginado={paginado}/>
-      {currentRecipes?.map((r) => (
-        
+      <h1 className={styles.foodly}>FOODLY</h1>
+      <SearchBar />
+      <Pages
+        recipsPerPage={recipesPerPage}
+        recips={recips.length}
+        paginado={paginado}
+      />
+
+      <div className={styles.recipes}>
+        {" "}
+        {currentRecipes?.map((r) => (
           <Recipes id={r.id} name={r.name} image={r.image} diet={r.diet} />
-       
-      ))}
-
-    
+        ))}
+      </div>
     </div>
-
-
   );
 };
 
