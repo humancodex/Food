@@ -65,3 +65,10 @@ export const FilterRecipesByDiets = (payload) => {
   }
   
 }
+
+
+export const postRecipe =  (object) => {
+  return async function (){
+     await axios.post("http://localhost:3001/recipes/",object);
+   }
+}

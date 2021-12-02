@@ -35,7 +35,7 @@ async function getRecipes(req, res, next) {
         readyInMinutes: r.readyInMinutes,
         image: r.image,
         steps: stepByStep,
-        diet: r.diets
+        diets: r.diets
       };
     });
 
@@ -148,9 +148,24 @@ const getById = async (req, res) => {
           res.status(200).json(recipe);
         },
         async () => {
-          let db = await Recipe.findAll({ where: { id }, include: Diet });
-          if (db.length > 0) {
-            res.status(200).json(db);
+          let db = await Recipe.findOne({ where: { id }, include: Diet });
+
+          if (db) {
+
+var formateo = {
+  id: db.id,
+  name: db.name,
+  summary: db.summary,
+  score: db.score,
+  healthLevel: db.healthLevel,
+  readyInMinutes: db.readyInMinutes,
+  diets: db.diets.map((d) => d.name),
+  image: db.image,
+  steps: db.steps,
+};
+
+
+            res.status(200).json(formateo);
           }
         }
       );

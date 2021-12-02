@@ -1,11 +1,7 @@
 import { useEffect } from "react";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getDiets } from "../../redux/actions/index";
-
-
-
-
+import { getDiets, postRecipe } from "../../redux/actions/index";
 
 function RecipeCreate() {
   const [recipe, setRecipe] = useState({
@@ -14,12 +10,13 @@ function RecipeCreate() {
     score: "", //hacer parce int en el create recipe
     healthLevel: "",
     instructions: "",
-    diets:[],
+    readyInMinutes:"",
+    diets: [],
   });
 
-    let dispatch = useDispatch();
-    let diets = useSelector((state) => state.diets);
-    useEffect(() => dispatch(getDiets()), [dispatch]);
+  let dispatch = useDispatch();
+  let diets = useSelector((state) => state.diets);
+  useEffect(() => dispatch(getDiets()), [dispatch]);
 
   const handleChange = (e) => {
     setRecipe({
@@ -28,24 +25,57 @@ function RecipeCreate() {
     });
   };
 
-    useEffect(() => dispatch(getDiets()), [dispatch]);
+  useEffect(() => dispatch(getDiets()), [dispatch]);
 
   const handleSelect = (e) => {
-   setRecipe({
-     ...recipe,
-     diets: [...recipe.diets, e.target.value]
-   });
+    setRecipe({
+      ...recipe,
+      diets: [...recipe.diets, e.target.value],
+    });
+  };
+
+  const handleSubmit = (e) => {
+    //el valor del evento se va a guardar en el estado
+    e.preventDefault();
+    let Recipe = {
+      recipe: {
+        name: recipe.name,
+        summary: recipe.summary,
+        score: parseInt(recipe.score),
+        healthLevel: parseInt(recipe.healthLevel),
+        steps: recipe.instructions,
+        image: `https://www.kindpng.com/picc/m/107-1074309_food-png-black-and-white-jpg-format-download.png`,
+        readyInMinutes: parseInt(recipe.readyInMinutes),
+      },
+      diets: recipe.diets,
+    };
+    dispatch(postRecipe(Recipe))
+    window.location.reload()//para que se recargue luego de enviar el recarga
+     alert('RECETA CREADA CON ÉXITO!')
   };
 
 
-  // const handleSubmit = (e) => {
 
-
-  // }
-
+  /* 
+  
+    score: {
+      type: DataTypes.INTEGER,
+    },
+    healthLevel: {
+      type: DataTypes.INTEGER,
+    },
+    steps: {
+      type: DataTypes.STRING,
+    },
+    image: {
+      type: DataTypes.TEXT,
+    },
+    readyInMinutes: {
+      type: DataTypes.INTEGER,
+    }, */
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Name</label>
         <input onChange={handleChange} value={recipe.name} name="name" />
 
@@ -76,11 +106,18 @@ function RecipeCreate() {
         />
 
         <select onChange={handleSelect}>
-        
           {diets?.map((d) => (
             <option value={d.name}>{d.name}</option>
           ))}
         </select>
+
+        <label>Ready in</label>
+        <input
+          onChange={handleChange}
+          value={recipe.readyInMinutes}
+          name="readyInMinutes"
+        />
+        <label>minutes</label>
 
         <button>Create</button>
       </form>

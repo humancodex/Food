@@ -5,7 +5,7 @@ import { getById } from "../../redux/actions/index";
 function RecipeDetail(props) {
   let dispatch = useDispatch();
   let detailId = useSelector((state) => state.detailId);
-
+console.log(detailId);
   useEffect(() => {
     let id = props.match.params.id;
 

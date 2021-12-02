@@ -8,7 +8,7 @@ import {
 // 
 const initialState ={
 recipes : [],
-detailId: [],
+detailId: {},
 diets: [],
 allRecipes:[],
 }

@@ -40,7 +40,7 @@ const paginado = (pageNumber)=> setCurrentPage(pageNumber)
       <div className={styles.recipes}>
         {" "}
         {currentRecipes?.map((r) => (
-          <Recipes id={r.id} name={r.name} image={r.image} diet={r.diet} />
+          <Recipes id={r.id} name={r.name} image={r.image} diets={r.diets} />
         ))}
       </div>
     </div>
