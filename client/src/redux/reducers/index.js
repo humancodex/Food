@@ -3,6 +3,7 @@ import {
   GET_BY_ID,
   GET_DIETS,
   FILTER_BY_DIETS,
+  GET_BY_NAME,
 } from "../actions/index";
 
 // 
@@ -28,6 +29,11 @@ export default function rootReducer(state = initialState,action) {
         return {
           ...state,
           detailId: action.payload,
+        };
+      case GET_BY_NAME:
+        return {
+          ...state,
+          recipes: action.payload,
         };
       case GET_DIETS:
         return {

@@ -1,0 +1,25 @@
+.img{
+    width: 270px;
+    border-radius: 10px;
+}
+
+.container{
+    height: 400px;
+    width: 400px;
+    background-color: rgb(39, 39, 39);
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: space-evenly;
+    flex-direction: column;
+}
+
+/* h2{
+  
+} */
+
+.navlink{
+   text-decoration: none;  
+  color:white; 
+}

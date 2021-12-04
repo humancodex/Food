@@ -45,7 +45,7 @@ export const getById = (id) => {
 export const getDiets = () => {
   return async function (dispatch) {
     let get = await axios.get("http://localhost:3001/diets")
-    var array =[]
+    
     
     return dispatch({
       type: "GET_DIETS",
@@ -72,3 +72,5 @@ export const postRecipe =  (object) => {
      await axios.post("http://localhost:3001/recipes/",object);
    }
 }
+
+

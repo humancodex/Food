@@ -27,9 +27,12 @@ const paginado = (pageNumber)=> setCurrentPage(pageNumber)
 
 
 
+if (
+  currentRecipes.length > 0 &&
+  currentRecipes[0] !=  "No se encontró la receta solicitada"
+) {
   return (
-    <div>
-      <h1 className={styles.foodly}>FOODLY</h1>
+    <div className={styles.container}>
       <SearchBar />
       <Pages
         recipsPerPage={recipesPerPage}
@@ -45,6 +48,20 @@ const paginado = (pageNumber)=> setCurrentPage(pageNumber)
       </div>
     </div>
   );
+} else {
+  return (
+    <div>
+      <h1 className={styles.foodly}>FOODLY</h1>
+      <SearchBar />
+      <div>
+        <h1>No se encontró la receta solicitada</h1>
+      </div>
+    </div>
+  );
+}
+
+  
+  ;
 };
 
 export default Home;

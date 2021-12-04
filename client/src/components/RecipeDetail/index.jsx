@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getById } from "../../redux/actions/index";
+import styles from "./RecipeDetail.module.css";
 
 function RecipeDetail(props) {
   let dispatch = useDispatch();
@@ -14,7 +15,7 @@ console.log(detailId);
   }, [dispatch]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>{detailId.name}</h1>
       <img src={detailId.image} alt="" />
       <div>
@@ -22,13 +23,11 @@ console.log(detailId);
           <li>READY IN : {detailId.readyInMinutes}</li>
           <li>SCORE: {detailId.score}</li>
           <li>HEALTH LEVEL: {detailId.healthLevel}</li>
-          
         </ul>
-
       </div>
-      <div>DIETS: {detailId.diets?.map(d=><span>{d}</span>
-      )}</div>
-
+      <div>
+        DIETS: {detailId.diets?.map(d=><span>{d}</span>)}
+      </div>
       <p>SUMMARY: {detailId.summary}</p>
       <p>STEPS : {detailId.steps}</p>
     </div>

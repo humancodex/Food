@@ -16,8 +16,9 @@ function App() {
    
     <div>
 
-    {/* <Navbar/> */}
+    <Navbar/>
       <Switch>
+      
         <Route exact path="/" component={LandingPage} />
         <Route  path="/home" component={Home} />
         <Route  path="/recipe/:id" component={RecipeDetail} />
