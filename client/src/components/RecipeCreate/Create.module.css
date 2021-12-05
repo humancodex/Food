@@ -1,0 +1,19 @@
+.form{
+    width: max-content;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: space-evenly;
+    border-radius: 20px;
+    background-color: #121212;
+    color: white;
+    margin: auto;
+    padding: 40px;
+    font-size: larger;
+}
+
+.container{
+   padding-top: 100px;
+   padding-bottom: 50px;
+}

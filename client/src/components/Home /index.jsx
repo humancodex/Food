@@ -50,11 +50,10 @@ if (
   );
 } else {
   return (
-    <div>
-      <h1 className={styles.foodly}>FOODLY</h1>
+    <div className={styles.container2}>
       <SearchBar />
-      <div>
-        <h1>No se encontró la receta solicitada</h1>
+      <div className={styles.notFound}>
+        <h2>No se encontró la receta solicitada</h2>
       </div>
     </div>
   );

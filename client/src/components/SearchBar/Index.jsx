@@ -31,7 +31,6 @@ function SearchBar() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.foodly}>FOODLY</h1>
       <form onSubmit={handleName}>
         <input
           onChange={handleChange}
@@ -52,7 +51,7 @@ function SearchBar() {
           <option value="high">High Score</option>
           <option value="low">Low Score</option>
         </select>
-        DIET TYPES :{" "}
+        DIET TYPES :
         <select
           onChange={(e) => {
             HandleFilterByDiet(e);

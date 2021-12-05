@@ -43,11 +43,12 @@ export default function rootReducer(state = initialState,action) {
       case FILTER_BY_DIETS:
 
       const allRecipes = state.allRecipes
+      console.log(allRecipes)
       const filteredDiets =
         action.payload === "all"
           ? allRecipes
           : allRecipes.filter(
-              (r) => r.diet.includes(action.payload) 
+              (r) => r.diets.includes(action.payload) 
             );
 
 

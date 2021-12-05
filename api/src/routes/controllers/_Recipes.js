@@ -4,7 +4,7 @@ const { Recipe, Diet } = require("../../db");
 const { API_KEY , NEXT_KEY } = process.env;
 
 
-const API = NEXT_KEY;
+const API = API_KEY;
 
 async function getRecipes(req, res, next) {
   //tryc y apretar enter
@@ -41,7 +41,16 @@ async function getRecipes(req, res, next) {
 
     let listRecipes = await Recipe.findAll({include: Diet});
 
-    res.json(listRecipes.concat(apiRecipe));
+    formateo = listRecipes.map((recipe) => {
+      return {
+        id: recipe.id,
+        image: recipe.image,
+        name: recipe.name,
+        diets: recipe.diets.map((d) => d.name)
+      }
+    })
+
+    res.json(formateo.concat(apiRecipe));
   } catch (e) {
     next(e);
   }

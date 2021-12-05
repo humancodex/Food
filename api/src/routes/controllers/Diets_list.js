@@ -1,5 +1,4 @@
 module.exports = [
-  
   "Gluten Free",
   "Ketogenic",
   "Vegetarian",

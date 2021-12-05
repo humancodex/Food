@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDiets, postRecipe } from "../../redux/actions/index";
+import styles from "./Create.module.css"
 
 function RecipeCreate() {
   const [recipe, setRecipe] = useState({
@@ -54,28 +55,9 @@ function RecipeCreate() {
      alert('RECETA CREADA CON ÉXITO!')
   };
 
-
-
-  /* 
-  
-    score: {
-      type: DataTypes.INTEGER,
-    },
-    healthLevel: {
-      type: DataTypes.INTEGER,
-    },
-    steps: {
-      type: DataTypes.STRING,
-    },
-    image: {
-      type: DataTypes.TEXT,
-    },
-    readyInMinutes: {
-      type: DataTypes.INTEGER,
-    }, */
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <label>Name</label>
         <input onChange={handleChange} value={recipe.name} name="name" />
 
@@ -126,6 +108,8 @@ function RecipeCreate() {
 }
 
 export default RecipeCreate;
+
+
 // [ ] Un formulario controlado con los siguientes campos
 // Nombre
 // Resumen del plato
