@@ -4,6 +4,8 @@ import {
   GET_DIETS,
   FILTER_BY_DIETS,
   GET_BY_NAME,
+  NAME_ORDER,
+  SCORE_ORDER
 } from "../actions/index";
 
 // 
@@ -23,7 +25,7 @@ export default function rootReducer(state = initialState,action) {
         return {
           ...state,
           recipes: action.payload,
-          allRecipes:action.payload
+          allRecipes: action.payload,
         };
       case GET_BY_ID:
         return {
@@ -40,21 +42,27 @@ export default function rootReducer(state = initialState,action) {
           ...state,
           diets: action.payload,
         };
+      case NAME_ORDER:
+        return {
+          ...state,
+          recipes: action.payload,
+        };
+      case SCORE_ORDER:
+        return {
+          ...state,
+          recipes: action.payload,
+        };
       case FILTER_BY_DIETS:
-
-      const allRecipes = state.allRecipes
-      console.log(allRecipes)
-      const filteredDiets =
-        action.payload === "all"
-          ? allRecipes
-          : allRecipes.filter(
-              (r) => r.diets.includes(action.payload) 
-            );
-
+        const allRecipes = state.allRecipes;
+        console.log(allRecipes);
+        const filteredDiets =
+          action.payload === "all"
+            ? allRecipes
+            : allRecipes.filter((r) => r.diets.includes(action.payload));
 
         return {
-         ...state,
-         recipes: filteredDiets,
+          ...state,
+          recipes: filteredDiets,
         };
 
       default:

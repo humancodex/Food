@@ -5,8 +5,10 @@ import {
   getDiets,
   FilterRecipesByDiets,
   getByName,
+  sortRecipesByName,
+  sortRecipesByScore,
 } from "../../redux/actions/index";
-import styles from './SearchBar.module.css';
+import styles from "./SearchBar.module.css";
 
 function SearchBar() {
   const dispatch = useDispatch();
@@ -18,15 +20,20 @@ function SearchBar() {
   const handleChange = (e) => setName(e.target.value);
 
   const handleName = (e) => {
-    
-   e.preventDefault();  
-   dispatch(getByName(name.toLowerCase()))
-   setName('')
-  
+    e.preventDefault();
+    dispatch(getByName(name.toLowerCase()));
+    setName("");
   };
 
   const HandleFilterByDiet = (e) => {
     dispatch(FilterRecipesByDiets(e.target.value));
+  };
+
+  const handleSortByName = (e) => {
+    dispatch(sortRecipesByName(e.target.value));
+  };
+  const handleSortByScore = (e) => {
+    dispatch(sortRecipesByScore(e.target.value));
   };
 
   return (
@@ -41,15 +48,23 @@ function SearchBar() {
         <button>search</button>
       </form>
       <div className={styles.selectcontainer}>
-        ORDER BY TITLE :{" "}
-        <select>
+        ORDER BY NAME :{" "}
+        <select
+          onChange={(e) => {
+            handleSortByName(e);
+          }}
+        >
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
         </select>
         ORDER BY SCORE :
-        <select>
-          <option value="high">High Score</option>
-          <option value="low">Low Score</option>
+        <select
+          onChange={(e) => {
+            handleSortByScore(e);
+          }}
+        >
+          <option value="asc">High Score</option>
+          <option value="desc">Low Score</option>
         </select>
         DIET TYPES :
         <select
