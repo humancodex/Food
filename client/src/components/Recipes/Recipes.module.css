@@ -15,8 +15,13 @@
     flex-direction: column;
 }
 
+span{
+  color:antiquewhite; 
+   
+}
+
 /* h2{
-  
+
 } */
 
 .navlink{
