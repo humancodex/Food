@@ -48,12 +48,12 @@ async function getRecipes(req, res, next) {
         diets: recipe.diets.map((d) => d.name),
       };
     });
-
+    
     res.json(formateo.concat(apiRecipe));
   } catch (e) {
     next(e);
   }
-} //precargar en home
+} //done
 
 async function sortRecipes(req, res, next) {
   //tryc y apretar enter
@@ -154,7 +154,7 @@ if (sort === "asc") {
   } catch (e) {
     next(e);
   }
-} //precargar en home
+} //done
 
 async function getRecipeByName(req, res, next) {
   try {
@@ -198,7 +198,7 @@ async function getRecipeByName(req, res, next) {
   } catch (error) {
     next(error);
   }
-} //cuando mandes desde el front  que sea en minusculas
+} //done
 
 const postRecipe = async (req, res, next) => {
   try {
@@ -279,14 +279,7 @@ const getById = async (req, res) => {
   }
 }; //done
 
-// Nombre
-// Resumen del plato
-// Puntuación
-// Nivel de "comida saludable"
-// Paso a paso
-// [ ] Posibilidad de seleccionar/agregar uno o más tipos de dietas
 
-// }
 module.exports = {
   getRecipes,
   getRecipeByName,
@@ -295,19 +288,4 @@ module.exports = {
   sortRecipes,
 };
 
-// [ ] GET /recipes?name="...":
-// Obtener un listado de las recetas que contengan la palabra ingresada como query parameter
-// Si no existe ninguna receta mostrar un mensaje adecuado
 
-// [ ] GET /recipes/{idReceta}:
-// Obtener el detalle de una receta en particular
-// Debe traer solo los datos pedidos en la ruta de detalle de receta
-// Incluir los tipos de dieta asociados
-
-// [ ] GET /types:
-// Obtener todos los tipos de dieta posibles
-// En una primera instancia, cuando no exista ninguno, deberán precargar la base de datos con los tipos de datos indicados por spoonacular acá
-
-// [ ] POST /recipe:
-// Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
-// Crea una receta en la base de datos

@@ -7,8 +7,7 @@ import Pages from '../Paginado/Paginas'
 import Recipes from "../Recipes/index";
 import SearchBar from "../SearchBar/Index";
 
-// //aqui me hago el paginado
-//RECIBE envioa recipes / SEARCHBAR
+
 
 const Home = () => {
   const dispatch = useDispatch();
