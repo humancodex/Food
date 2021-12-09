@@ -20,7 +20,7 @@ describe("<RecipeCreate/>", () => {
 
     it('Renderiza un label con el texto igual a "Name"', () => {
       // El orden en el que se encuentran los Labels es importante.
-      expect(wrapper.find("Name").at(0).text()).toEqual("Name");
+      expect(wrapper.find("label").at(0).text()).toEqual("Name");
     });
 
     it('Renderiza un input con la propiedad "name" igual a "name"', () => {

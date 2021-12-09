@@ -41,8 +41,8 @@ if (
 
       <div className={styles.recipes}>
         {" "}
-        {currentRecipes?.map((r) => (
-          <Recipes key={r.id}id={r.id} name={r.name} image={r.image} diets={r.diets} />
+        {currentRecipes?.map((r,i) => (
+          <Recipes key={i}id={r.id} name={r.name} image={r.image} diets={r.diets} />
         ))}
       </div>
     </div>

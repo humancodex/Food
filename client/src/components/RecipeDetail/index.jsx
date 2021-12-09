@@ -6,13 +6,12 @@ import styles from "./RecipeDetail.module.css";
 function RecipeDetail(props) {
   let dispatch = useDispatch();
   let detailId = useSelector((state) => state.detailId);
-console.log(detailId);
-  useEffect(() => {
+
+  useEffect(() => { 
     let id = props.match.params.id;
 
     dispatch(getById(id));
-    // console.log(detailId);
-  }, [dispatch]);
+  }, [dispatch, props.match.params.id]);
 
   return (
     <div className={styles.container}>
@@ -26,7 +25,10 @@ console.log(detailId);
         </ul>
       </div>
       <div>
-        DIETS: {detailId.diets?.map(d=><span>{d}</span>)}
+        DIETS:{" "}
+        {detailId.diets?.map((d) => (
+          <span>{d}</span>
+        ))}
       </div>
       <p>SUMMARY: {detailId.summary}</p>
       <p>STEPS : {detailId.steps}</p>

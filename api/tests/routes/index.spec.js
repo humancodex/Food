@@ -4,10 +4,10 @@ const chai = require("chai");
 const session = require('supertest-session');
 const app = require('../../src/app.js');
 
-chai.should()
+chai.should()//assertions 
 const agent = session(app);
 
-describe("Test", () => {
+describe("TestBack", () => {
 
 
   describe("GET /", () => {

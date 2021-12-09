@@ -37,7 +37,7 @@ async function getRecipes(req, res, next) {
         diets: r.diets,
       };
     });
-
+//DB
     let listRecipes = await Recipe.findAll({ include: Diet });
 
     formateo = listRecipes.map((recipe) => {
@@ -49,7 +49,7 @@ async function getRecipes(req, res, next) {
       };
     });
     
-    res.json(formateo.concat(apiRecipe));
+    res.status(200).json(formateo.concat(apiRecipe));
   } catch (e) {
     next(e);
   }

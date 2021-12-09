@@ -73,8 +73,8 @@ function SearchBar() {
           }}
         >
           <option value="all">all</option>
-          {diets?.map((d) => (
-            <option value={d.name}>{d.name}</option>
+          {diets?.map((d,i) => (
+            <option key={i} value={d.name}>{d.name}</option>
           ))}
         </select>
         <button onClick={() => dispatch(FilterRecipesByDiets("all"))}>

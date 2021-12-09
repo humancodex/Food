@@ -17,7 +17,7 @@ allRecipes:[],
 }
 
 
-export default function rootReducer(state = initialState,action) {
+export default function rootReducer(state = initialState,action) {//reducer actualiza el estado 
 
 
     switch (action.type) {

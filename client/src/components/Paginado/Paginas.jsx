@@ -16,8 +16,8 @@ pageNumbers.push(i)
     return (
        <nav>
            <ul className={styles.pagination}>
-               {pageNumbers?.map(n=> (//renderiza por separado 
-                   <li>
+               {pageNumbers?.map((n,i)=> (//renderiza por separado 
+                   <li key={i}>
                        <button onClick={()=>{paginado(n)}}>{n}</button>
                    </li>
                ))}

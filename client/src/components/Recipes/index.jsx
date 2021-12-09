@@ -11,7 +11,7 @@ const Recipe = ({ id, name, image, diets }) => {
         <img src={image} alt="" className={styles.img} />
 
         <div>
-          {diets.map(d=>  <span> {d.charAt(0).toUpperCase() + d.slice(1)}. </span>)}
+          {diets.map((d, i)=>  <span key={i} > {d.charAt(0).toUpperCase() + d.slice(1)}. </span>)}
         </div>
       </div>
     </NavLink>

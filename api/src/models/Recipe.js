@@ -14,26 +14,34 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+     
     },
     summary: {
       type: DataTypes.STRING,
-
       allowNull: false,
+     
     },
     score: {
       type: DataTypes.INTEGER,
+      validate: {
+        isInt: true,
+      },
     },
     healthLevel: {
       type: DataTypes.INTEGER,
+      
     },
     steps: {
       type: DataTypes.STRING,
+      allowNull: false,
+     
     },
     image: {
       type: DataTypes.STRING,
     },
     readyInMinutes: {
       type: DataTypes.INTEGER,
+     
     },
   });
 };
