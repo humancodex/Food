@@ -20,30 +20,4 @@ describe("Test", () => {
   });
 });
 
-// let chai = require('chai');
-// let chaiHttp = require('chai-http');
 
-// let server = require('../../src/routes/index')
-
-
-// //assertions style for chai
-// chai.should()
-// chai.use(chaiHttp);
-
-// describe('recipesAPI' ,()=>{
-
-
-//   describe('GET /recipes/',() => {
-//     it('It should get all the recipes',(done)=>{
-//       chai.request(server)
-//       .get('/recipes/')
-//       .end((err, res) =>{
-//         res.should.have.status(200);
-//         res.body.should.be.a('array');
-//         res.boyd.lenght.should.be.eq(100);
-//         done();
-//       })
-//     })
-//   })
-
-// })

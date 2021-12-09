@@ -28,7 +28,7 @@ const paginado = (pageNumber)=> setCurrentPage(pageNumber)
 
 if (
   currentRecipes.length > 0 &&
-  currentRecipes[0] !=  "No se encontró la receta solicitada"
+  currentRecipes[0] !==  "No se encontró la receta solicitada"
 ) {
   return (
     <div className={styles.container}>
@@ -42,7 +42,7 @@ if (
       <div className={styles.recipes}>
         {" "}
         {currentRecipes?.map((r) => (
-          <Recipes id={r.id} name={r.name} image={r.image} diets={r.diets} />
+          <Recipes key={r.id}id={r.id} name={r.name} image={r.image} diets={r.diets} />
         ))}
       </div>
     </div>
