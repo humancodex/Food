@@ -9,6 +9,7 @@ function RecipeDetail(props) {
 
   useEffect(() => { 
     let id = props.match.params.id;
+    
 
     dispatch(getById(id));
   }, [dispatch, props.match.params.id]);

@@ -7,6 +7,7 @@ import {
   getByName,
   sortRecipesByName,
   sortRecipesByScore,
+  getRecipes
 } from "../../redux/actions/index";
 import styles from "./SearchBar.module.css";
 
@@ -30,11 +31,18 @@ function SearchBar() {
   };
 
   const handleSortByName = (e) => {
-    dispatch(sortRecipesByName(e.target.value));
+    if (e.target.value === "default") dispatch(getRecipes())
+    else dispatch(sortRecipesByName(e.target.value));
   };
   const handleSortByScore = (e) => {
-    dispatch(sortRecipesByScore(e.target.value));
+    if (e.target.value === "default") dispatch(getRecipes())
+    else dispatch(sortRecipesByScore(e.target.value));
   };
+
+  const handleReload = () => {
+    dispatch(getRecipes())
+    setName("")
+  }
 
   return (
     <div className={styles.container}>
@@ -48,12 +56,13 @@ function SearchBar() {
         <button>search</button>
       </form>
       <div className={styles.selectcontainer}>
-        ORDER BY NAME :{" "}
+        ORDER BY NAME :
         <select
           onChange={(e) => {
             handleSortByName(e);
           }}
         >
+          <option value="default">Default</option>
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
         </select>
@@ -63,6 +72,7 @@ function SearchBar() {
             handleSortByScore(e);
           }}
         >
+          <option value="default">Default</option>
           <option value="asc">High Score</option>
           <option value="desc">Low Score</option>
         </select>
@@ -77,7 +87,7 @@ function SearchBar() {
             <option key={i} value={d.name}>{d.name}</option>
           ))}
         </select>
-        <button onClick={() => dispatch(FilterRecipesByDiets("all"))}>
+        <button onClick={handleReload}>
           reload
         </button>
       </div>

@@ -289,3 +289,14 @@ module.exports = {
 };
 
 
+//  Recipe.findAll({
+//    where: {
+//      name: name,
+//    },
+//    include: Diet,
+//  }).then((recipe)=>{
+//     let result = recipe.concat(recipeInfo);
+//     if (result.length > 0) res.json(result);
+//     else res.send(["No se encontró la receta solicitada"]);
+//  })
+

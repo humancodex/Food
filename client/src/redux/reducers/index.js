@@ -46,20 +46,20 @@ export default function rootReducer(state = initialState,action) {//reducer actu
         return {
           ...state,
           recipes: action.payload,
+          allRecipes: action.payload,
         };
       case SCORE_ORDER:
         return {
           ...state,
           recipes: action.payload,
+          allRecipes: action.payload,
         };
       case FILTER_BY_DIETS:
         const allRecipes = state.allRecipes;
-        console.log(allRecipes);
         const filteredDiets =
           action.payload === "all"
             ? allRecipes
             : allRecipes.filter((r) => r.diets.includes(action.payload));
-
         return {
           ...state,
           recipes: filteredDiets,

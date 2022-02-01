@@ -8,15 +8,25 @@ export const GET_BY_NAME = "GET_BY_NAME";
 export const CREATE_RECIPES = "CREATE_RECIPE";
 export const FILTER_BY_DIETS = "FILTER_BY_DIETS";
 
+
+//modularizar constants 
+
+// crear archivo de urls , donde tenga un objeto que se llame links y tenga la prpiedad recipes 
+
+
+
+
 //shortcuts enf / edf / rfce
 export const getRecipes = () => {
-  return async function (dispatch) {
-    let get = await axios.get("http://localhost:3001/recipes/");
+  return  function (dispatch) {
+axios.get("http://localhost:3001/recipes/").then((response) => {
+ return dispatch({
+   type: "GET_RECIPES",
+   payload: response.data,
+ });
+    })
 
-    return dispatch({
-      type: "GET_RECIPES",
-      payload: get.data,
-    });
+   
   };
 };
 

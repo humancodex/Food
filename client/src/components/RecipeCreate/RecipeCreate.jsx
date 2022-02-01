@@ -36,9 +36,10 @@ function RecipeCreate() {
   useEffect(() => dispatch(getDiets()), [dispatch]);
 
   const handleSelect = (e) => {
+
     setRecipe({
       ...recipe,
-      diets: [...recipe.diets, e.target.value],
+      diets: [...new Set([...recipe.diets, e.target.value])],
     });
   };
 
@@ -48,7 +49,7 @@ function RecipeCreate() {
   const handleSubmit = (e) => {
     //el valor del evento se va a guardar en el estado
     e.preventDefault();
-    let Recipe = {
+    let Recipe = {//formateo 
       recipe: {
         name: recipe.name,
         summary: recipe.summary,
@@ -59,6 +60,7 @@ function RecipeCreate() {
         readyInMinutes: parseInt(recipe.readyInMinutes),
       },
       diets: recipe.diets,
+    
     };
     dispatch(postRecipe(Recipe))
     history.push('/home')
@@ -83,8 +85,8 @@ function RecipeCreate() {
           type="text"
           id="name"
           name="name"
+          required
         />
-
         <label htmlFor="summary">Summary</label>
         <input
           onChange={handleChange}
@@ -92,8 +94,8 @@ function RecipeCreate() {
           type="text"
           id="summary"
           name="summary"
+          required
         />
-
         <label>Score</label>
         <select onChange={handleChange} name="score">
           <option value="">---</option>
@@ -103,7 +105,6 @@ function RecipeCreate() {
           <option value={4}>4</option>
           <option value={5}>5</option>
         </select>
-
         <label htmlFor="healthLevel">HealthLevel</label>
         <input
           onChange={handleChange}
@@ -111,8 +112,8 @@ function RecipeCreate() {
           name="healthLevel"
           type="number"
           id="healthLevel"
+          required
         />
-
         <label htmlFor="instructions">Instructions</label>
         <textarea
           onChange={handleChange}
@@ -120,14 +121,16 @@ function RecipeCreate() {
           name="instructions"
           type="text"
           id="instructions"
+          required
         />
-
+        <label htmlFor="DIETS">DIETS</label>
         <select onChange={handleSelect}>
-          {diets?.map((d,i) => (
-            <option key={i} value={d.name}>{d.name}</option>
+          {diets?.map((d, i) => (
+            <option key={i} value={d.name}>
+              {d.name}
+            </option>
           ))}
         </select>
-
         <label htmlFor="ready_in">Ready in</label>
         <input
           onChange={handleChange}
@@ -135,10 +138,10 @@ function RecipeCreate() {
           name="readyInMinutes"
           type="text"
           id="ready_in"
+          required
         />
         <label>minutes</label>
-
-        <button type = 'submit'>Create</button>
+        <button type="submit">Create</button>
       </form>
     </div>
   );

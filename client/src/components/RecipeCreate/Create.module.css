@@ -9,14 +9,15 @@
     background-color: #121212;
     color: white;
     margin: auto;
-    padding: 40px;
+    padding: 80px;
     font-size: larger;
+    gap: 10px;
+    
 }
 
 .container{
    padding-top: 100px;
    padding-bottom: 50px;
-}
-.danger{
-    border: red 1px solid;
+   height: 900px;
+
 }
