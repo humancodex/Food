@@ -3,13 +3,15 @@ import styled from 'styled-components';
 import { MdKeyboardArrowRight ,MdArrowForward} from "react-icons/md";
 
 export const LandContainer = styled.div`
-background-color:#0c0c0c;
+background-color:#121212;
 display: flex;
 justify-content: center;
 align-items: center;
-padding: 0 30px;
 height: 800%;
-position: relative;
+
+
+
+/* position: relative; */
 z-index:1;
 
 :before {

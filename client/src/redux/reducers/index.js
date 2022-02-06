@@ -14,6 +14,8 @@ recipes : [],
 detailId: {},
 diets: [],
 allRecipes:[],
+loading: false,
+setLoading: true
 }
 
 

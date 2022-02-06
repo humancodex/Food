@@ -14,6 +14,7 @@ import {
 import { Button } from "../ButtonElement";
 import Video from "../../videos/video.mp4";
 
+
 function LandSection() {
   const [hover, setHover] = useState(false);
 

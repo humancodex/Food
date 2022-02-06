@@ -13,7 +13,7 @@ import RecipeCreate from './components/RecipeCreate/RecipeCreate'
 
 function App() {
   return (
-    <div>
+   <>
       <Navbar />
       <Switch>
         <Route exact path="/" component={LandingPage} />
@@ -29,7 +29,7 @@ function App() {
           }}
         />
       </Switch>
-    </div>
+    </>
   );
 }
 
