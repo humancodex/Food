@@ -4,6 +4,8 @@
     grid-column-gap: 130px ;
     grid-row-gap: 50px ;
     justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 25px;
 }
 .sweetLoading{
 align-items: center;
@@ -20,7 +22,6 @@ background-color:  #303030
 
 .container2{
     margin-top: 100px;
-    height: 790px
 }
 
 .notFound{

@@ -10,6 +10,9 @@ import {
   getRecipes
 } from "../../redux/actions/index";
 import styles from "./SearchBar.module.css";
+import Button from "@mui/material/Button";
+import { ButtonBase } from "@mui/material";
+
 
 function SearchBar() {
   const dispatch = useDispatch();
@@ -45,54 +48,50 @@ function SearchBar() {
   }
 
   return (
-    <div className={styles.container}>
-      <form onSubmit={handleName}>
-        <input
-          onChange={handleChange}
-          type="text"
-          value={name}
-          placeholder="search..."
-        ></input>
-        <button>search</button>
-      </form>
-      <div className={styles.selectcontainer}>
-        ORDER BY NAME :
-        <select
-          onChange={(e) => {
-            handleSortByName(e);
-          }}
-        >
-          <option value="default">Default</option>
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
-        ORDER BY SCORE :
-        <select
-          onChange={(e) => {
-            handleSortByScore(e);
-          }}
-        >
-          <option value="default">Default</option>
-          <option value="asc">High Score</option>
-          <option value="desc">Low Score</option>
-        </select>
-        DIET TYPES :
-        <select
-          onChange={(e) => {
-            HandleFilterByDiet(e);
-          }}
-        >
-          <option value="all">all</option>
-          {diets?.map((d,i) => (
-            <option key={i} value={d.name}>{d.name}</option>
-          ))}
-        </select>
-        <button onClick={handleReload}>
-          reload
-        </button>
-      </div>
-    </div>
-  );
+		<div className={styles.container}>
+			<form onSubmit={handleName}>
+				<input
+					onChange={handleChange}
+					type="text"
+					value={name}
+					placeholder="search..."></input>
+				<Button color="secondary">search</Button>
+			</form>
+			<div className={styles.selectcontainer}>
+				ORDER BY NAME :
+				<select
+					onChange={(e) => {
+						handleSortByName(e);
+					}}>
+					<option value="default">Default</option>
+					<option value="asc">Ascending</option>
+					<option value="desc">Descending</option>
+				</select>
+				ORDER BY SCORE :
+				<select
+					onChange={(e) => {
+						handleSortByScore(e);
+					}}>
+					<option value="default">Default</option>
+					<option value="asc">High Score</option>
+					<option value="desc">Low Score</option>
+				</select>
+				DIET TYPES :
+				<select
+					onChange={(e) => {
+						HandleFilterByDiet(e);
+					}}>
+					<option value="all">all</option>
+					{diets?.map((d, i) => (
+						<option key={i} value={d.name}>
+							{d.name}
+						</option>
+					))}
+				</select>
+				<button onClick={handleReload}>reload</button>
+			</div>
+		</div>
+	);
 }
 
 export default SearchBar;

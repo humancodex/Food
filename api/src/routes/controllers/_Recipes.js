@@ -3,7 +3,7 @@ const axios = require("axios");
 const { Recipe, Diet } = require("../../db");
 const { API_KEY, NEXT_KEY } = process.env;
 
-const API = API_KEY;
+const API = NEXT_KEY;
 
 async function getRecipes(req, res, next) {
   //tryc y apretar enter
