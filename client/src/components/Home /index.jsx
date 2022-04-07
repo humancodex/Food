@@ -1,28 +1,16 @@
 import React from "react";
 import styles from "./Home.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import { getRecipes } from "../../redux/actions/index";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
+import { useState } from "react";
 import Pages from "../Paginado/Paginas";
 import Recipes from "../Recipes/index";
 import SearchBar from "../SearchBar/Index";
-import CircleLoader from "react-spinners/CircleLoader";
-
-
+// 
 
 const Home = () => {
-	const dispatch = useDispatch();
+
 	const recips = useSelector((state) => state.recipes);
-	const [Loading, setLoading] = useState(false);
-
-
-	useEffect(() => {
-		setLoading(true);
-		dispatch(
-			getRecipes()
-		);
-		setLoading(false);
-	}, [dispatch]);
 
 	//PAGINADO
 	const [currentPage, setCurrentPage] = useState(1);
@@ -32,17 +20,10 @@ const Home = () => {
 	const currentRecipes = recips.slice(indexOfFirstRp, indexOfLastRp);
 	const paginado = (pageNumber) => setCurrentPage(pageNumber);
 
-	// if (
-	// 	currentRecipes.length > 0 &&
-	// 	currentRecipes[0] !== "No se encontró la receta solicitada"
-	// ) {
-
-	if (Loading) {
-		<div className={styles.sweetLoading}>
-			{" "}
-			<CircleLoader color={"#4336D7"} loading={Loading} size={30} />
-		</div>;
-	} else
+	if (
+		currentRecipes.length > 0 &&
+		currentRecipes[0] !== "No se encontró la receta solicitada"
+	) {
 		return (
 			<div className={styles.container}>
 				<SearchBar />
@@ -65,15 +46,16 @@ const Home = () => {
 				/>
 			</div>
 		);
+	} else
+		return (
+			<div className={styles.container2}>
+				<SearchBar />
+				<div className={styles.notFound}>
+					<h2>No se encontró la Receta</h2>
+				</div>
+			</div>
+		);
 };
 
 export default Home;
 
-{
-	/* // <div className={styles.container2}>
-// 	<SearchBar />
-// 	<div className={styles.notFound}>
-// 		<h2>No se encontró </h2>
-// 	</div>
-// </div> */
-}

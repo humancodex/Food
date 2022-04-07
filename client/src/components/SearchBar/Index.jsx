@@ -10,8 +10,8 @@ import {
   getRecipes
 } from "../../redux/actions/index";
 import styles from "./SearchBar.module.css";
-import Button from "@mui/material/Button";
-import { ButtonBase } from "@mui/material";
+
+
 
 
 function SearchBar() {
@@ -54,8 +54,9 @@ function SearchBar() {
 					onChange={handleChange}
 					type="text"
 					value={name}
+					
 					placeholder="search..."></input>
-				<Button color="secondary">search</Button>
+				{/* <Button color="primary">search</Button> */}
 			</form>
 			<div className={styles.selectcontainer}>
 				ORDER BY NAME :

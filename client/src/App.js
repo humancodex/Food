@@ -38,7 +38,7 @@ function App() {
 						path="/about"
 						component={() => {
 							window.location.href =
-								"https://www.linkedin.com/in/juan-sebasti%C3%A1n-carvajal-b%C3%A1ez-3622ba107/";
+								"https://www.linkedin.com/in/scorpion_dev";
 							return null;
 						}}
 					/>

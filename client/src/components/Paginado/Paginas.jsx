@@ -14,16 +14,26 @@ pageNumbers.push(i)
 
 
     return (
-       <nav>
-           <ul className={styles.pagination}>
-               {pageNumbers?.map((n,i)=> (//renderiza por separado 
-                   <li key={i}>
-                       <button onClick={()=>{paginado(n)}}>{n}</button>
-                   </li>
-               ))}
-           </ul>
-       </nav>
-    )
+			<nav className={styles.container}>
+				<ul className={styles.pagination}>
+					{pageNumbers?.map(
+						(
+							n,
+							i //renderiza por separado
+						) => (
+							<li key={i} className={styles.point}>
+								<button
+									onClick={() => {
+										paginado(n);
+									}}>
+									{n}
+								</button>
+							</li>
+						)
+					)}
+				</ul>
+			</nav>
+		);
 }
 
 export default Paginas

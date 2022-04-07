@@ -1,5 +1,5 @@
 // cmd/b
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import {
   LandContainer,
   LandBg,
@@ -13,7 +13,8 @@ import {
 } from "./LandElements";
 import { Button } from "../ButtonElement";
 import Video from "../../videos/video.mp4";
-
+import { getRecipes } from "../../redux/actions/index";
+import {useDispatch } from "react-redux"; 
 
 function LandSection() {
   const [hover, setHover] = useState(false);
@@ -21,6 +22,10 @@ function LandSection() {
   const onHover = () => {
     setHover(!hover);
   };
+const dispatch = useDispatch();
+  	useEffect(() => {
+			dispatch(getRecipes());
+		}, [dispatch]);
 
   return (
     <LandContainer>

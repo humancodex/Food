@@ -14,8 +14,7 @@ recipes : [],
 detailId: {},
 diets: [],
 allRecipes:[],
-loading: false,
-setLoading: true
+
 }
 
 
@@ -29,6 +28,7 @@ export default function rootReducer(state = initialState,action) {//reducer actu
           recipes: action.payload,
           allRecipes: action.payload,
         };
+     
       case GET_BY_ID:
         return {
           ...state,

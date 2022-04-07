@@ -126,10 +126,7 @@ async function sortRecipes(req, res, next) {
          res.json(allData);
       }
     } else {
-      //score
-
-
-      
+      //score    
 if (sort === "asc") {
   allData.sort((a, b) => {
     if (a.score > b.score) return 1; //numeros de indice en el array
@@ -150,7 +147,7 @@ if (sort === "asc") {
 }
       
     }
-    // res.json(formateo.concat(apiRecipe));
+    
   } catch (e) {
     next(e);
   }
